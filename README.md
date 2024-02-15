@@ -15,6 +15,10 @@ sudo systemctl enable firewalld
 sudo systemctl status firewalld
 ```
 
+  - display the all rules of the firewall service.
+    ```
+    firewall-cmd --list
+    ```
 ## Deploy and Configure Database
 
 1. Install MariaDB
@@ -25,11 +29,16 @@ sudo vi /etc/my.cnf
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
 ```
+ - To check the status of the db service to make sure it is active and running.
+    ```
+    sudo systemctl status mariadb
+    ```
 
 2. Configure firewall for Database
 
 ```
 sudo firewall-cmd --permanent --zone=public --add-port=3306/tcp
+sudo firewall-cmd --list-all
 sudo firewall-cmd --reload
 ```
 
@@ -64,6 +73,9 @@ Run sql script
 ```
 
 sudo mysql < db-load-script.sql
+show databases
+use ecomdb
+select *from products;
 ```
 
 
@@ -90,6 +102,7 @@ sudo sed -i 's/index.html/index.php/g' /etc/httpd/conf/httpd.conf
 ```
 sudo systemctl start httpd
 sudo systemctl enable httpd
+sudo systemctl status httpd
 ```
 
 4. Download code
